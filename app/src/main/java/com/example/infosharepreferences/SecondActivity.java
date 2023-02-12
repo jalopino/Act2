@@ -26,6 +26,7 @@ public class SecondActivity extends AppCompatActivity {
         sbtnlogout = findViewById(R.id.sbtnlogout);
 
         sharedPreferences = getSharedPreferences("SHARED_PREF", MODE_PRIVATE);
+        boolean ischkrme = sharedPreferences.getBoolean("RME", false);
 
         String sname = sharedPreferences.getString("NAME", "");
         stvname.setText(sname);
@@ -40,9 +41,10 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.clear();
+                if (!ischkrme) {
+                    editor.clear();
+                }
                 editor.apply();
-
                 Intent intent = new Intent(SecondActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();

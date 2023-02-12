@@ -34,13 +34,6 @@ public class MainActivity extends AppCompatActivity {
         btnretrieve = findViewById(R.id.btnretrieve);
 
         sharedPreferences = getSharedPreferences("SHARED_PREF", MODE_PRIVATE);
-        ischkrme = sharedPreferences.getBoolean("RME", false);
-
-        if (ischkrme) {
-            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-            startActivity(intent);
-            finish();
-        }
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +56,20 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+        btnretrieve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String sname = sharedPreferences.getString("NAME", "");
+                edtname.setText(sname);
+                int sage = sharedPreferences.getInt("AGE",0);
+                edtage.setText(""+sage);
+                String saddress = sharedPreferences.getString("ADDRESS","");
+                edtaddress.setText(saddress);
+                int scontact = sharedPreferences.getInt("CONTACT NUMBER", 0);
+                edtcontact.setText(""+scontact);
+
             }
         });
     }
